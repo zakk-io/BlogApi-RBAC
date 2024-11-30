@@ -3,7 +3,11 @@ const mongoose = require("mongoose")
 const path = require("path")
 require("dotenv").config()
 const cookieparser = require("cookie-parser")
+const users = require("./routes/users")
+const {HandlingJsonSyntaxError,AuthMiddleware} = require("./middlewares")
 //packages
+
+
 
 //settings
 const app = express()
@@ -24,9 +28,9 @@ app.set("view engine","ejs")
 app.use(express.json())
 app.use(cookieparser())
 app.use(express.static(path.join(__dirname,'public')))
+app.use(HandlingJsonSyntaxError)
+app.use(users)
 //middlewares
-
-
 
 
 

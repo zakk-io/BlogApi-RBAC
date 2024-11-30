@@ -1,0 +1,9 @@
+###register 
+POST http://127.0.0.1:2000/api/auth/register
+Content-Type: application/json
+
+{
+    "username" : "zakaria",
+    "email" : "mozakk.io@gmail.com",
+    "password" : "1234$Qwer"
+}
