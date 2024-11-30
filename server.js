@@ -44,6 +44,10 @@ app.get('/dashbaord/posts',(req,res) => {
     res.render('dashbaord-posts')
 })
 
+app.get('/register',(req,res) => {
+    res.render('register')
+})
+
 app.get('*',(req,res) => {
     res.render('404')
 })
