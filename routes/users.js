@@ -9,7 +9,7 @@ const users = require("../controllers/users")
 
 router.post("/api/auth/register",users.Register)
 router.post("/api/auth/login",users.Login)
-router.get("/api/auth/logout",users.Logout)
+router.get("/logout",users.Logout)
 
 
 module.exports = router
