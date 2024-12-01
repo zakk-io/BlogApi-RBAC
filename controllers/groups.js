@@ -80,6 +80,24 @@ const UpdateGroup = async (req,res) => {
 }
 
 
+
+const DeleteGroup = async (req,res) => {
+    try {
+        await Groups.deleteOne({_id:req.group._id})
+        
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            message: "Group deleted successfully",
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.json(error)  
+    }
+}
+
+
 //expermental
 const JoinGroup = async (req,res) => {
     const group = await Groups.findOne({_id:req.params.group_id})
@@ -101,5 +119,6 @@ const JoinGroup = async (req,res) => {
 module.exports = {
     CreateGroup,
     UpdateGroup,
+    DeleteGroup,
     JoinGroup
 }

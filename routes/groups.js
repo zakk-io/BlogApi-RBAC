@@ -9,6 +9,8 @@ router.use(AuthMiddleware)
 
 router.post("/api/groups",groups.CreateGroup)
 router.put("/api/groups/:group_id",GroupPermissions("update"),groups.UpdateGroup)
+router.delete("/api/groups/:group_id",GroupPermissions("delete"),groups.DeleteGroup)
+
 
 //expermental
 router.get("/api/groups/:group_id/join",groups.JoinGroup)
