@@ -1,0 +1,8 @@
+###create group 
+POST http://127.0.0.1:2000/api/groups
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGJlYjBhOTdjZGU3OGYzM2NlZmQ2MiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzAyODYyMDk4MSwiaWF0IjoxNzMzMDI4NjIwLCJleHAiOjE3MzM2MzM0MjB9.tkP5xZbLVZ66uY2q1ezEd5bG0yloV7JhLNdx3T0LyLs
+
+{
+    "name" : "zakaria group"
+}

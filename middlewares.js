@@ -20,15 +20,20 @@ const HandlingJsonSyntaxError = (err,req,res,next) => {
 
 const AuthMiddleware = async (req,res,next) => {
     try {
-        const token = req.cookies.JWT
-        
+        let token;
+        // Retrieve token from Authorization header or cookies
+        if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+            token = req.headers.authorization.split(" ")[1];
+        } else if (req.cookies.JWT) {
+            token = req.cookies.JWT; // Extract token from cookies
+        }
+
         if(!token){
             return res.redirect("/login?message=loggin first")   
         }
 
         const payload = jwt.verify(token,process.env.ACCESS_TOKEN_SECERET)
         req.user = payload
-        console.log("user_id in AuthMiddleware" +req.user.id);
         next()
 
     } catch (error) {

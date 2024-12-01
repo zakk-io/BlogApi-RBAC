@@ -32,7 +32,7 @@ const UserSchema = mongoose.Schema(
                 group_id : {type:mongoose.Types.ObjectId,ref:"Groups"},
                 role : {
                     type: String,
-                    enum : ["admin","member"],
+                    enum : ["owner","admin","member"],
                 }
             }
         ]
