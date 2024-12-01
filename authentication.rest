@@ -3,18 +3,18 @@ POST http://127.0.0.1:2000/api/auth/register
 Content-Type: application/json
 
 {
-    "username" : "zakaria",
-    "email" : "mozakk.io@gmail.com",
+    "username" : "ali",
+    "email" : "ali@gmail.com",
     "password" : "1234$Qwer"
 }
 
 
 
-###logout 
+###login 
 POST http://127.0.0.1:2000/api/auth/login
 Content-Type: application/json
 
 {
-    "email" : "mozakk.io@gmail.com",
+    "email" : "ali@gmail.com",
     "password" : "1234$Qwer"
 }

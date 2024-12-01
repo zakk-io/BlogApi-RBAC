@@ -1,8 +1,26 @@
 ###create group 
 POST http://127.0.0.1:2000/api/groups
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGJlYjBhOTdjZGU3OGYzM2NlZmQ2MiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzAyODYyMDk4MSwiaWF0IjoxNzMzMDI4NjIwLCJleHAiOjE3MzM2MzM0MjB9.tkP5xZbLVZ66uY2q1ezEd5bG0yloV7JhLNdx3T0LyLs
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMjgxYmE5YjQ3YmYxM2VjNSIsInVzZXJuYW1lIjoiYWxpIiwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwiY3JlYXRlX2F0IjoxNzMzMDcxNTg4MTM0LCJpYXQiOjE3MzMwNzE1ODgsImV4cCI6MTczMzY3NjM4OH0.pEoBu5r-H7J_ouI-kOoIbHrE6PAtf1DdSCJYq3iI6jI
 
 {
-    "name" : "zakaria group"
+    "name" : "ali group"
 }
+
+
+
+###update group 
+PUT http://127.0.0.1:2000/api/groups/674c940e30ff9ec29b2783e0
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzA3MTU1OTExNCwiaWF0IjoxNzMzMDcxNTU5LCJleHAiOjE3MzM2NzYzNTl9.drP4p7DL1WXgVvaKQe9aNCogKu9pKJlWP6wKj7wkTyU
+
+{
+    "name" : "zakaria group,updated"
+}
+
+
+
+###expermental
+GET http://127.0.0.1:2000/api/groups/674c931f281ba9b47bf13ec9/join
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMjgxYmE5YjQ3YmYxM2VjNSIsInVzZXJuYW1lIjoiYWxpIiwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwiY3JlYXRlX2F0IjoxNzMzMDcxNTg4MTM0LCJpYXQiOjE3MzMwNzE1ODgsImV4cCI6MTczMzY3NjM4OH0.pEoBu5r-H7J_ouI-kOoIbHrE6PAtf1DdSCJYq3iI6jI
+
