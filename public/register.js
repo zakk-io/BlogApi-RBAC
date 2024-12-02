@@ -7,6 +7,8 @@ const registerEmail = document.getElementById('registerEmail')
 const registerPassword = document.getElementById('registerPassword')
 const errormessage = document.getElementById('error-message')
 
+const redirect = DOMPurify.sanitize(new URLSearchParams(window.location.search).get("redirect"),{ ALLOWED_TAGS: [] })
+
 
 registerForm.addEventListener('submit',async (e) => {
     e.preventDefault()
@@ -21,6 +23,11 @@ registerForm.addEventListener('submit',async (e) => {
         headers : {"Content-Type": "application/json"},
         body : JSON.stringify(body)
     })
+
+    if(redirect){
+        window.location.href = redirect 
+        return;
+    }
 
     if(response.redirected){
         window.location.href = response.url

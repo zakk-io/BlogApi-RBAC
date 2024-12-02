@@ -5,15 +5,14 @@ const {AuthMiddleware} = require("../middlewares")
 const GroupPermissions = require("../Permissions/group")
 
 
-router.use(AuthMiddleware)
 
+router.get("/api/groups/:group_id/join",groups.JoinGroup)
+router.use(AuthMiddleware)
 router.post("/api/groups",groups.CreateGroup)
 router.put("/api/groups/:group_id",GroupPermissions("update"),groups.UpdateGroup)
 router.delete("/api/groups/:group_id",GroupPermissions("delete"),groups.DeleteGroup)
+router.post("/api/groups/:group_id",GroupPermissions("invite_user"),groups.InviteToGroup)
 
-
-//expermental
-router.get("/api/groups/:group_id/join",groups.JoinGroup)
 
 
 

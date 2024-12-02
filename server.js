@@ -31,21 +31,12 @@ app.use(cookieparser())
 app.use(express.static(path.join(__dirname,'public')))
 app.use(HandlingJsonSyntaxError)
 app.use(users)
-app.use(groups)
 //middlewares
 
 
 
 
 //templates endpoints
-app.get('/dashbaord',(req,res) => {
-    res.render('dashbaord')
-})
-
-app.get('/dashbaord/posts',(req,res) => {
-    res.render('dashbaord-posts')
-})
-
 app.get('/register',(req,res) => {
     res.render('register')
 })
@@ -54,10 +45,21 @@ app.get('/login',(req,res) => {
     res.render('login')
 })
 
+app.get('/dashbaord',(req,res) => {
+    res.render('dashbaord')
+})
+
+app.use(groups)
+
+app.get('/dashbaord/posts',(req,res) => {
+    res.render('dashbaord-posts')
+})
+
 app.get('*',(req,res) => {
     res.render('404')
 })
 //templates endpoints
+
 
 
 app.listen(2000,() => console.log("server listening on port 2000"))

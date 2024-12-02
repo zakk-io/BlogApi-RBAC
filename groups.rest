@@ -26,8 +26,15 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMj
 
 
 
-
-###expermental
-GET http://127.0.0.1:2000/api/groups/674c931f281ba9b47bf13ec9/join
+###invite user 
+POST http://127.0.0.1:2000/api/groups/674dce6f99b7fd5cf7e72d54
+Content-Type: application/json
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMjgxYmE5YjQ3YmYxM2VjNSIsInVzZXJuYW1lIjoiYWxpIiwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwiY3JlYXRlX2F0IjoxNzMzMDcxNTg4MTM0LCJpYXQiOjE3MzMwNzE1ODgsImV4cCI6MTczMzY3NjM4OH0.pEoBu5r-H7J_ouI-kOoIbHrE6PAtf1DdSCJYq3iI6jI
+
+{
+    "email" : "ali@gmail.com",
+    "role" : "member"
+}
+
+
 

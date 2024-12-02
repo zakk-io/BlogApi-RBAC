@@ -2,7 +2,7 @@ const Roles = [
     {
         name : "owner",
         permissions : [
-            {subject : "group", actions : ["update","delete","invite_user","kick_user"]},
+            {subject : "group", actions : ["update","delete","invite_user","kick_user","set_role"]},
         ]
     },
 
