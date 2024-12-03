@@ -280,10 +280,10 @@ const UpdateRole = async(req,res) => {
         const group = user.groups.find((group) => group.group_id.toString() === req.group._id.toString())
 
         if(!group){
-            return res.status(404).json({
-                status: 404,
+            return res.status(400).json({
+                status: 400,
                 successful: false,
-                message: "group not found or user not part of the group",
+                message: "user not part of the group",
             })  
         }
 
@@ -315,11 +315,86 @@ const UpdateRole = async(req,res) => {
 }
 
 
+const KickUser = async (req,res) => {
+    try {
+        const email = req.body.email
+
+        const user = await Users.findOne({email:email})
+        if(!user){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                message: "user not found",
+            })  
+        }
+        
+        const group = user.groups.find((group) => group.group_id.toString() === req.group._id.toString())
+
+        if(!group){
+            return res.status(400).json({
+                status: 400,
+                successful: false,
+                message: "user not part of the group",
+            })  
+        }
+
+        /*
+        maybe a midillware function can take 2 arguments (email,group_owner_id)
+         */
+        const owner = await Users.findOne({_id:req.group.owner}) 
+        if(owner.email === email){
+            return res.status(400).json({
+                status: 400,
+                successful: false,
+                message: "group owner can not be kicked",
+            })
+        }
+        
+        //remove group from the groups list in user object
+        user.groups.pull(group)
+        await user.save()
+
+        //remove user form members list from group object
+        req.group.members.pull(user._id)
+        await req.group.save()
+
+        await Invitations.deleteOne({
+            group_id : req.group._id.toString(),
+            email : email,
+            used : true
+        })
+
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            message: `user kicked out the group by ${req.user.email}`,
+        })
+        
+    } catch (error) {
+        const ErrorObject = {
+            status : 400,
+            successful : false,
+            error : error.name,
+            message : error._message,
+            body : error.message
+        }
+
+        if(error.name === "ValidationError"){
+            return res.status(400).json(ErrorObject)
+        }
+
+        console.log(error);
+        res.json(error)  
+    }
+}
+
+
 module.exports = {
     CreateGroup,
     UpdateGroup,
     DeleteGroup,
     InviteToGroup,
     JoinGroup,
-    UpdateRole
+    UpdateRole,
+    KickUser
 }
