@@ -12,6 +12,8 @@ router.post("/api/groups",groups.CreateGroup)
 router.put("/api/groups/:group_id",GroupPermissions("update"),groups.UpdateGroup)
 router.delete("/api/groups/:group_id",GroupPermissions("delete"),groups.DeleteGroup)
 router.post("/api/groups/:group_id",GroupPermissions("invite_user"),groups.InviteToGroup)
+router.post("/api/groups/:group_id/UpdateRole",GroupPermissions("update_role"),groups.UpdateRole)
+
 
 
 

@@ -1,10 +1,10 @@
 ###create group 
 POST http://127.0.0.1:2000/api/groups
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMjgxYmE5YjQ3YmYxM2VjNSIsInVzZXJuYW1lIjoiYWxpIiwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwiY3JlYXRlX2F0IjoxNzMzMDcxNTg4MTM0LCJpYXQiOjE3MzMwNzE1ODgsImV4cCI6MTczMzY3NjM4OH0.pEoBu5r-H7J_ouI-kOoIbHrE6PAtf1DdSCJYq3iI6jI
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzA3MTU1OTExNCwiaWF0IjoxNzMzMDcxNTU5LCJleHAiOjE3MzM2NzYzNTl9.drP4p7DL1WXgVvaKQe9aNCogKu9pKJlWP6wKj7wkTyU
 
 {
-    "name" : "ali group"
+    "name" : "zakaria group2"
 }
 
 
@@ -35,6 +35,21 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMj
     "email" : "ali@gmail.com",
     "role" : "member"
 }
+
+
+
+
+###update role 
+POST http://127.0.0.1:2000/api/groups/674e83e2875faf13e26a9939/UpdateRole
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzA3MTU1OTExNCwiaWF0IjoxNzMzMDcxNTU5LCJleHAiOjE3MzM2NzYzNTl9.drP4p7DL1WXgVvaKQe9aNCogKu9pKJlWP6wKj7wkTyU
+
+{
+    "email" : "mozakk.io@gmail.com",
+    "role" : "admin"
+}
+
+
 
 
 
