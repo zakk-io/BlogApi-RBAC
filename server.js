@@ -5,6 +5,7 @@ require("dotenv").config()
 const cookieparser = require("cookie-parser")
 const users = require("./routes/users")
 const groups = require("./routes/groups")
+const posts = require("./routes/posts")
 const {HandlingJsonSyntaxError,AuthMiddleware} = require("./middlewares")
 //packages
 
@@ -31,6 +32,7 @@ app.use(cookieparser())
 app.use(express.static(path.join(__dirname,'public')))
 app.use(HandlingJsonSyntaxError)
 app.use(users)
+app.use(posts)
 //middlewares
 
 

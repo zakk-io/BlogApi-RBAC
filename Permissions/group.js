@@ -13,10 +13,10 @@ const GroupPermissions = function (action) {
             const group = user.groups.find((group) => group.group_id.toString() === group_id)
             
             if(!group){
-                return res.status(404).json({
-                    status: 404,
+                return res.status(403).json({
+                    status: 403,
                     successful: false,
-                    message: "no group found with this id",
+                    message: "user is not part of the group",
                 })
             }
 
