@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const Groups = require("../models/groups")
 const Users = require("../models/users")
 const Posts = require("../models/posts")
+const { post } = require("../routes/posts")
 
 
 
@@ -131,10 +132,69 @@ const PostApproval = async (req,res) => {
 }
 
 
+const UpdatePost = async (req,res) => {
+    try {
+        const author_id = req.user.id
+        const post_id = req.params.post_id
+
+        const post = await Posts.findOne({
+            _id : post_id,
+            author : author_id,
+            status : "approved"  
+        })
+
+        if(!post){
+           return res.status(404).json({
+               status: 404,
+               successful: false,
+               message : "post not found"
+           })  
+        }
+
+        await Posts.findByIdAndUpdate(
+            {_id : post_id},
+            { $set: req.body },
+            {runValidators: true }
+        );
+        
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            message: "post updated successfully",
+        })
+        
+    } catch (error) {
+        const ErrorObject = {
+            status : 400,
+            successful : false,
+            error : error.name,
+            message : error._message,
+            body : error.message
+        }
+
+        if(error.name === "ValidationError"){
+            return res.status(400).json(ErrorObject)
+        }
+
+        if(error.name === "CastError"){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                message: "post not found",
+            })
+        }
+
+        console.log(error);
+        res.json(error) 
+    }
+}
+
+
 
 module.exports = {
     CreatePost,
     ListPosts,
     PostApproval,
-    PendedPosts
+    PendedPosts,
+    UpdatePost
 }

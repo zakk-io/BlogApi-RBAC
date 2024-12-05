@@ -1,11 +1,11 @@
 ###create post
-POST http://127.0.0.1:2000/api/groups/674dce6f99b7fd5cf7e72d54/posts
+POST http://127.0.0.1:2000/api/groups/674c931f281ba9b47bf13ec9/posts
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMjgxYmE5YjQ3YmYxM2VjNSIsInVzZXJuYW1lIjoiYWxpIiwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwiY3JlYXRlX2F0IjoxNzMzMDcxNTg4MTM0LCJpYXQiOjE3MzMwNzE1ODgsImV4cCI6MTczMzY3NjM4OH0.pEoBu5r-H7J_ouI-kOoIbHrE6PAtf1DdSCJYq3iI6jI
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzMyMDkyNDQxNSwiaWF0IjoxNzMzMzIwOTI0LCJleHAiOjE3MzM5MjU3MjR9.S6yKketBoPUZoy9b8W3QsWSGb6S5MNJzn8UJVeBhIJ8
 
 {
-    "title" : "post in ali 4",
-    "content" : "no content 4"
+    "title" : "created by zakaria",
+    "content" : "created by zakaria"
 }
 
 
@@ -23,5 +23,17 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMj
 
 
 ###post approval
-GET http://127.0.0.1:2000/api/groups/674dce6f99b7fd5cf7e72d54/posts/67512061bfde21e5ece1f21d
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmUxMjgxYmE5YjQ3YmYxM2VjNSIsInVzZXJuYW1lIjoiYWxpIiwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwiY3JlYXRlX2F0IjoxNzMzMDcxNTg4MTM0LCJpYXQiOjE3MzMwNzE1ODgsImV4cCI6MTczMzY3NjM4OH0.pEoBu5r-H7J_ouI-kOoIbHrE6PAtf1DdSCJYq3iI6jI
+GET http://127.0.0.1:2000/api/groups/674c931f281ba9b47bf13ec9/posts/6750617a5013f12079d9744f
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzMyMDkyNDQxNSwiaWF0IjoxNzMzMzIwOTI0LCJleHAiOjE3MzM5MjU3MjR9.S6yKketBoPUZoy9b8W3QsWSGb6S5MNJzn8UJVeBhIJ8
+
+
+
+###update post
+PUT http://127.0.0.1:2000/api/posts/6751336777ccfcaa917a1188
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzMyMDkyNDQxNSwiaWF0IjoxNzMzMzIwOTI0LCJleHAiOjE3MzM5MjU3MjR9.S6yKketBoPUZoy9b8W3QsWSGb6S5MNJzn8UJVeBhIJ8
+
+{
+    "title" : "update by zakaria",
+    "content" : "update by zakaria"
+}

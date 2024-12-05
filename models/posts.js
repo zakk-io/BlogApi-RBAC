@@ -10,7 +10,7 @@ const PostsSchema = mongoose.Schema(
 
         author : {
             type : mongoose.Types.ObjectId,
-            ref : "Group"
+            ref : "Users"
         },
 
         title : {
