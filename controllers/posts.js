@@ -41,6 +41,14 @@ const CreatePost = async (req,res) => {
             return res.status(400).json(ErrorObject)
         }
 
+        if(error.name === "CastError"){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                message: "group not found",
+            })
+        }
+
         console.log(error);
         res.json(error) 
     }
@@ -72,6 +80,13 @@ const ListPosts = async (req,res) => {
         })
         
     } catch (error) {
+        if(error.name === "CastError"){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                message: "group not found",
+            })
+        }
         console.log(error);
         res.json(error) 
     }
@@ -102,6 +117,14 @@ const PendedPosts = async (req,res) => {
         })
         
     } catch (error) {
+        if(error.name === "CastError"){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                message: "resoures not found",
+            })
+        }
+
         console.log(error);
         res.json(error) 
     }
@@ -126,6 +149,14 @@ const PostApproval = async (req,res) => {
         })
 
     } catch (error) {
+        if(error.name === "CastError"){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                message: "resoures not found",
+            })
+        }
+
         console.log(error);
         res.json(error) 
     }
@@ -191,10 +222,43 @@ const UpdatePost = async (req,res) => {
 
 
 
+
+
+const DeletePost = async (req,res) => {
+    try {
+        const post = req.post
+
+        if(!post){
+           return res.status(404).json({
+               status: 404,
+               successful: false,
+               message : "post not found"
+           })  
+        }
+
+        await Posts.findByIdAndDelete(
+            {_id : post._id},
+        )
+        
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            message: "post deleted successfully",
+        })
+        
+    } catch (error) {
+        console.log(error);
+        res.json(error) 
+    }
+}
+
+
+
 module.exports = {
     CreatePost,
     ListPosts,
     PostApproval,
     PendedPosts,
-    UpdatePost
+    UpdatePost,
+    DeletePost
 }

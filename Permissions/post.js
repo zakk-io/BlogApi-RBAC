@@ -31,10 +31,11 @@ const IsGroupMemeber = function() {
 }
 
 
-const PostPermissions = function(action) {
+const PostPermissions = function(action,check_ownership) {
     return async (req,res,next) => {
         try {
             const user_group = req.user_group
+            const post_id = req.params.post_id
             const user = await Users.findOne({_id:req.user.id})
 
             const user_role = user_group.role
@@ -42,19 +43,44 @@ const PostPermissions = function(action) {
             const permissions = role.permissions
 
             //compare
-            const haspermsisons = permissions.some(
+            const haspermission = permissions.some(
                 (perm) => perm.subject === "post" && perm.actions.includes(action)
             )
-            if(!haspermsisons){
-                return res.status(403).json({
-                    status: 403,
-                    successful: false,
-                    message: "you do not have permsisons to do this action",
-                })
+
+            const post = await Posts.findOne({
+                _id :post_id,
+                author: req.user.id,
+                status: "approved" 
+            })
+
+            if(haspermission){
+                req.post = post
+                return next()
             }
 
-            next()
+            if(check_ownership){
+                if(post){
+                  req.post = post
+                  return next()
+                }
+            }
+
+            return res.status(403).json({
+                status: 403,
+                successful: false,
+                message: "you do not have permsisons to do this action",
+            })
+
         } catch (error) {
+            if(error.name === "CastError"){
+                console.log(1);
+                return res.status(404).json({
+                    status: 404,
+                    successful: false,
+                    message: "post not found",
+                })
+            }
+            
             console.log(error);
             res.json(error) 
         }
