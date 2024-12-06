@@ -11,6 +11,8 @@ const {CheckPost} = require("../Permissions/comments")
 router.use(AuthMiddleware)
 
 router.post("/api/groups/:group_id/posts/:post_id/comments",[IsGroupMemeber(),CheckPost()],comments.CreateComment)
+router.get("/api/groups/:group_id/posts/:post_id/comments",[IsGroupMemeber(),CheckPost()],comments.ListComments)
+
 
 
 module.exports = router

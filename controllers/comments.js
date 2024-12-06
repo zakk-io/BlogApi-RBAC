@@ -44,9 +44,40 @@ const CreateComment = async (req,res) => {
 
 
 
+const ListComments = async (req,res) => {
+    try {
+        const post = req.post
+          
+        const comments = await Comments.find({
+            post_id : post._id
+        })
+
+        if(comments.length === 0){
+            return res.status(200).json({
+                status: 200,
+                successful: false,
+                message: "no comments for now",
+                comments
+            })  
+        }
+        
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            comments
+        })
+        
+    } catch (error) {
+        res.json(error) 
+    }
+}
+
+
+
 
 
 module.exports = {
     CreateComment,
+    ListComments
 }
 
