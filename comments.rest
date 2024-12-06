@@ -1,15 +1,23 @@
 ### create comment
-POST http://127.0.0.1:2000/api/groups/674c931f281ba9b47bf13ec9/posts/6750617a5013f12079d9744f/comments
+POST http://127.0.0.1:2000/api/groups/674dce6f99b7fd5cf7e72d54/posts/67511de315a059c25e80f263/comments
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzMyMDkyNDQxNSwiaWF0IjoxNzMzMzIwOTI0LCJleHAiOjE3MzM5MjU3MjR9.S6yKketBoPUZoy9b8W3QsWSGb6S5MNJzn8UJVeBhIJ8
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGQ0MTI1ODQ0MjJlNDJkYjc0YWJmZCIsInVzZXJuYW1lIjoibWVtYmVyIiwiZW1haWwiOiJ1ZzI0MjQ3ODdAaW5lcy5hYy5ydyIsImNyZWF0ZV9hdCI6MTczMzExNjQxMDQwMywiaWF0IjoxNzMzMTE2NDEwLCJleHAiOjE3MzM3MjEyMTB9.69H_15HYtk5sClFL3yAxzTkDqukIdVPaJMeFoxZ5vt8
 
 {
-    "text" : "cc fefffe"
+    "text" : "delete your comment as memeber : yes"
 }
 
 
 
 
 ### list comments
-GET http://127.0.0.1:2000/api/groups/674c931f281ba9b47bf13ec9/posts/6751336777ccfcaa917a1188/comments
+GET http://127.0.0.1:2000/api/groups/674c931f281ba9b47bf13ec9/posts/6750617a5013f12079d9744f/comments
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzMyMDkyNDQxNSwiaWF0IjoxNzMzMzIwOTI0LCJleHAiOjE3MzM5MjU3MjR9.S6yKketBoPUZoy9b8W3QsWSGb6S5MNJzn8UJVeBhIJ8
+
+
+
+
+
+### delete comment
+DELETE http://127.0.0.1:2000/api/groups/674dce6f99b7fd5cf7e72d54/posts/67511de315a059c25e80f263/comments/675286182edebc77df92dae2
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGQ0MTI1ODQ0MjJlNDJkYjc0YWJmZCIsInVzZXJuYW1lIjoibWVtYmVyIiwiZW1haWwiOiJ1ZzI0MjQ3ODdAaW5lcy5hYy5ydyIsImNyZWF0ZV9hdCI6MTczMzExNjQxMDQwMywiaWF0IjoxNzMzMTE2NDEwLCJleHAiOjE3MzM3MjEyMTB9.69H_15HYtk5sClFL3yAxzTkDqukIdVPaJMeFoxZ5vt8

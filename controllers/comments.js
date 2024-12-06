@@ -1,7 +1,4 @@
 const mongoose = require("mongoose")
-const Groups = require("../models/groups")
-const Users = require("../models/users")
-const Posts = require("../models/posts")
 const Comments = require("../models/comments")
 
 
@@ -74,10 +71,27 @@ const ListComments = async (req,res) => {
 
 
 
+const DeleteComment = async (req,res) => {
+    try {
+        await Comments.deleteOne({_id:req.comment_id})
+
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            message: "comment deleted successfully",
+        })
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+
+
 
 
 module.exports = {
     CreateComment,
-    ListComments
+    ListComments,
+    DeleteComment
 }
 

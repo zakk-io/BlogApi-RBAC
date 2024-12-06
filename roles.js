@@ -4,7 +4,7 @@ const Roles = [
         permissions : [
             {subject : "group", actions : ["update","delete","invite_user","kick_user","update_role"]},
             {subject : "post", actions : ["pended_posts","post_approval","delete_post"]},
-            {subject : "comments", actions : ["delete_comment"]}
+            {subject : "comment", actions : ["delete_comment"]}
         ]
     },
 
@@ -13,7 +13,7 @@ const Roles = [
         permissions : [
             {subject : "group", actions : ["kick_user"]},
             {subject : "post", actions : ["pended_posts","post_approval","delete_post"]},
-            {subject : "comments", actions : ["delete_comment"]}
+            {subject : "comment", actions : ["delete_comment"]}
         ]
     },
 
@@ -22,7 +22,7 @@ const Roles = [
         permissions : [
             {subject : "group", actions : [""]},
             {subject : "post", actions : [""]},
-            {subject : "comments", actions : [""]}
+            {subject : "comment", actions : [""]}
 
         ]
     },
