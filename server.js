@@ -6,6 +6,7 @@ const cookieparser = require("cookie-parser")
 const users = require("./routes/users")
 const groups = require("./routes/groups")
 const posts = require("./routes/posts")
+const comments = require("./routes/comments")
 const {HandlingJsonSyntaxError,AuthMiddleware} = require("./middlewares")
 //packages
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(HandlingJsonSyntaxError)
 app.use(users)
 app.use(posts)
+app.use(comments)
 //middlewares
 
 

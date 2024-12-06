@@ -24,8 +24,16 @@ const IsGroupMemeber = function() {
 
             next()
         } catch (error) {
-           console.log(error);
-           res.json(error) 
+            if(error.name === "CastError"){
+                return res.status(404).json({
+                    status: 404,
+                    successful: false,
+                    message: "group not found",
+                })
+            }
+            
+            console.log(error);
+            res.json(error)
         }
     }
 }
@@ -53,6 +61,14 @@ const PostPermissions = function(action,check_ownership) {
                 status: "approved" 
             })
 
+            if(!post){
+                return res.status(404).json({
+                    status: 404,
+                    successful: false,
+                    message: "post not found",
+                })
+            }
+
             if(haspermission){
                 req.post = post
                 return next()
@@ -73,7 +89,6 @@ const PostPermissions = function(action,check_ownership) {
 
         } catch (error) {
             if(error.name === "CastError"){
-                console.log(1);
                 return res.status(404).json({
                     status: 404,
                     successful: false,

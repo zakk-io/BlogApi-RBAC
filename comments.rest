@@ -1,0 +1,8 @@
+### create comment
+POST http://127.0.0.1:2000/api/groups/674c931f281ba9b47bf13ec9/posts/6751336777ccfcaa917a1188/comments
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NGM5MmM0MjgxYmE5YjQ3YmYxM2VjMiIsInVzZXJuYW1lIjoiemFrYXJpYSIsImVtYWlsIjoibW96YWtrLmlvQGdtYWlsLmNvbSIsImNyZWF0ZV9hdCI6MTczMzMyMDkyNDQxNSwiaWF0IjoxNzMzMzIwOTI0LCJleHAiOjE3MzM5MjU3MjR9.S6yKketBoPUZoy9b8W3QsWSGb6S5MNJzn8UJVeBhIJ8
+
+{
+    "text" : "fisrt comment"
+}

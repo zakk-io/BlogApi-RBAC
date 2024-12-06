@@ -5,7 +5,7 @@ const PostsSchema = mongoose.Schema(
     {
         group_id : {
             type : mongoose.Types.ObjectId,
-            ref : "Group"
+            ref : "Groups"
         },
 
         author : {
