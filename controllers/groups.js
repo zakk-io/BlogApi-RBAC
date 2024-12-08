@@ -6,6 +6,8 @@ const Invitations = require("../models/invitations")
 const nodemailer = require("nodemailer")
 const crypto = require("crypto")
 const { log } = require("console")
+const Posts = require("../models/posts")
+const Comments = require("../models/comments")
 
 
 
@@ -121,7 +123,8 @@ const InviteToGroup = async (req,res) => {
         });
 
         let invitation;
-        const owner = await Users.findOne({_id:req.group.owner})
+        const group = await Groups.findOne({_id:group_id})
+        const owner = await Users.findOne({_id:group.owner})
         invitation = await Invitations.findOne({ 
             email : email,
             group_id : group_id,
@@ -250,7 +253,11 @@ const UpdateRole = async(req,res) => {
     try {
         const email = req.body.email 
         const role = req.body.role
-        const owner = await Users.findOne({_id:req.group.owner})
+        const group_id = req.params.group_id
+
+        const group = await Groups.findOne({_id:group_id})
+        const owner = await Users.findOne({_id:group.owner})
+        
 
         if(owner.email === email){
             return res.status(400).json({
@@ -276,18 +283,17 @@ const UpdateRole = async(req,res) => {
                 message: "user not found",
             })  
         }
-        
-        const group = user.groups.find((group) => group.group_id.toString() === req.group._id.toString())
 
-        if(!group){
+        const g = user.groups.find((g) => g.group_id.toString() === group_id)
+        if(!g){
             return res.status(400).json({
                 status: 400,
                 successful: false,
                 message: "user not part of the group",
             })  
         }
-
-        group.role = role
+        g.role = role
+        
         await user.save()
 
         return res.status(200).json({
@@ -318,6 +324,17 @@ const UpdateRole = async(req,res) => {
 const KickUser = async (req,res) => {
     try {
         const email = req.body.email
+        const group_id = req.params.group_id
+
+        const group = await Groups.findOne({_id:group_id})
+        const owner = await Users.findOne({_id:group.owner}) 
+        if(owner.email === email){
+            return res.status(400).json({
+                status: 400,
+                successful: false,
+                message: "group owner can not be kicked",
+            })
+        }
 
         const user = await Users.findOne({email:email})
         if(!user){
@@ -328,9 +345,9 @@ const KickUser = async (req,res) => {
             })  
         }
         
-        const group = user.groups.find((group) => group.group_id.toString() === req.group._id.toString())
-
-        if(!group){
+        const g = user.groups.find((g) => g.group_id.toString() === group_id)
+        if(!g){
+            console.log(g);
             return res.status(400).json({
                 status: 400,
                 successful: false,
@@ -338,28 +355,17 @@ const KickUser = async (req,res) => {
             })  
         }
 
-        /*
-        maybe a midillware function can take 2 arguments (email,group_owner_id)
-         */
-        const owner = await Users.findOne({_id:req.group.owner}) 
-        if(owner.email === email){
-            return res.status(400).json({
-                status: 400,
-                successful: false,
-                message: "group owner can not be kicked",
-            })
-        }
         
         //remove group from the groups list in user object
-        user.groups.pull(group)
+        user.groups.pull(g)
         await user.save()
 
         //remove user form members list from group object
-        req.group.members.pull(user._id)
-        await req.group.save()
+        group.members.pull(user._id)
+        await group.save()
 
         await Invitations.deleteOne({
-            group_id : req.group._id.toString(),
+            group_id : group_id,
             email : email,
             used : true
         })
@@ -389,6 +395,103 @@ const KickUser = async (req,res) => {
 }
 
 
+
+const GroupMembers = async (req,res) => {
+    const group_id = req.params.group_id
+    const group = await Groups.findOne({
+        _id : group_id,
+        owner : req.user.id
+    }).populate("members")
+
+    const members = await Promise.all(group.members.map(async (member) => {
+        const g = member.groups.find((g) => g.group_id.toString() === group_id)
+        const posts = await Posts.find({
+            group_id,
+            author : member._id
+        })
+
+        return {
+            id : member._id,
+            username : member.username,
+            email : member.email,
+            role : g.role,
+            posts : posts.length
+        }
+    }))
+
+    return res.status(200).json({
+        status: 200,
+        successful: true,
+        members
+    })
+}
+
+
+//ListInvitedUsers
+const ListInvitations = async (req,res) => {
+    try {
+        const group_id = req.params.group_id
+        const invitations = await Invitations.find({group_id , used : false})
+
+        if(invitations.length === 0){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                invitations: [],
+                message: "no invitations for now",
+            }) 
+        }
+
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            invitations
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.json(error)   
+    }
+}
+//ListInvitedUsers
+
+
+
+
+//DeleteInvitation
+const DeleteInvitation = async (req,res) => {
+    try {
+        const invitation_id = req.params.invitation_id
+
+        const invitation = await Invitations.findOne({
+            _id : invitation_id,
+            used : false
+        })
+
+        if(!invitation){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                message: "invitation not found",
+            }) 
+        }
+        
+        await Invitations.deleteOne({_id:invitation._id})
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            message: "invitation deleted successfully",
+        }) 
+
+    } catch (error) {
+        console.log(error);
+        res.json(error)   
+    }
+}
+//DeleteInvitation
+
+
 module.exports = {
     CreateGroup,
     UpdateGroup,
@@ -396,5 +499,8 @@ module.exports = {
     InviteToGroup,
     JoinGroup,
     UpdateRole,
-    KickUser
+    KickUser,
+    GroupMembers,
+    ListInvitations,
+    DeleteInvitation
 }

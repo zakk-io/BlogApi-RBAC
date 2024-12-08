@@ -254,11 +254,13 @@ const DeletePost = async (req,res) => {
 
 
 
+
+
 module.exports = {
     CreatePost,
     ListPosts,
     PostApproval,
     PendedPosts,
     UpdatePost,
-    DeletePost
+    DeletePost,
 }

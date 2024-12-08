@@ -17,7 +17,7 @@ const IsGroupMemeber = function() {
                 return res.status(403).json({
                     status: 403,
                     successful: false,
-                    message: "user is not part of the group",
+                    message: "group not found or user is not part of it",
                 })
             }
             req.user_group = group

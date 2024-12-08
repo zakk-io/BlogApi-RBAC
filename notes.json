@@ -1,0 +1,53 @@
+[
+{
+  _id: new ObjectId('674c92c4281ba9b47bf13ec2'),
+  username: 'zakaria',
+  email: 'mozakk.io@gmail.com',
+  password: '$2b$10$1cb8ayrk88IcxHnekqai/uVeWTKGIeAh1HFDNePPssrLZPNDejvCa',
+  groups: [
+    {
+      group_id: new ObjectId('674c931f281ba9b47bf13ec9'),
+      role: 'owner',
+      _id: new ObjectId('674c931f281ba9b47bf13ecb')
+    },
+    {
+      group_id: new ObjectId('674d38ad81b3caf9370c1342'),
+      role: 'owner',
+      _id: new ObjectId('674d38ad81b3caf9370c1344')
+    },
+    {
+      group_id: new ObjectId('674d3b45df2d0a4839f3a2fd'),
+      role: 'admin',
+      _id: new ObjectId('674d3b45df2d0a4839f3a2ff')
+    },
+    {
+      group_id: new ObjectId('674e83e2875faf13e26a9939'),
+      role: 'owner',
+      _id: new ObjectId('674e83e2875faf13e26a993b')
+    }
+  ]
+}
+
+]
+
+
+[
+  {
+    username : cccdcd,
+    email : cwcwcwcc,
+    skills : [html,css]
+  },
+
+  {
+    username : cccdcd,
+    email : cwcwcwcc,
+    skills : [html,css]
+  },
+
+  {
+    username : cccdcd,
+    email : cwcwcwcc,
+    skills : [html,css]
+  },
+
+]

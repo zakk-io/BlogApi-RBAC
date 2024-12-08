@@ -14,6 +14,10 @@ router.delete("/api/groups/:group_id",GroupPermissions("delete"),groups.DeleteGr
 router.post("/api/groups/:group_id",GroupPermissions("invite_user"),groups.InviteToGroup)
 router.post("/api/groups/:group_id/UpdateRole",GroupPermissions("update_role"),groups.UpdateRole)
 router.post("/api/groups/:group_id/kick",GroupPermissions("kick_user"),groups.KickUser)
+router.get("/api/groups/:group_id/members",GroupPermissions("group_members"),groups.GroupMembers)
+router.get("/api/groups/:group_id/invitations",GroupPermissions("list_invited_users"),groups.ListInvitations)
+router.delete("/api/groups/:group_id/invitations/:invitation_id",GroupPermissions("delete_invitations"),groups.DeleteInvitation)
+
 
 
 

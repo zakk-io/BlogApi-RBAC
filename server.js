@@ -8,6 +8,9 @@ const groups = require("./routes/groups")
 const posts = require("./routes/posts")
 const comments = require("./routes/comments")
 const {HandlingJsonSyntaxError,AuthMiddleware} = require("./middlewares")
+const GroupPermissions = require("./Permissions/group")
+const Groups = require("./models/groups")
+const Posts = require("./models/posts")
 //packages
 
 
@@ -32,15 +35,10 @@ app.use(express.json())
 app.use(cookieparser())
 app.use(express.static(path.join(__dirname,'public')))
 app.use(HandlingJsonSyntaxError)
-app.use(users)
-app.use(posts)
-app.use(comments)
 //middlewares
 
-
-
-
 //templates endpoints
+app.use(users)
 app.get('/register',(req,res) => {
     res.render('register')
 })
@@ -48,12 +46,24 @@ app.get('/register',(req,res) => {
 app.get('/login',(req,res) => {
     res.render('login')
 })
+//templates endpoints
 
-app.get('/dashbaord',(req,res) => {
-    res.render('dashbaord')
+
+//templates endpoints
+app.use(groups)
+app.use(posts)
+app.use(comments)
+
+app.use(AuthMiddleware)
+
+app.get('/dashbaord/:group_id',async (req,res) => {
+    const user = req.user
+    const data = {
+        user,
+    }
+    res.render('dashbaord',data)
 })
 
-app.use(groups)
 
 app.get('/dashbaord/posts',(req,res) => {
     res.render('dashbaord-posts')

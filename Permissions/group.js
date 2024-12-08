@@ -16,7 +16,7 @@ const GroupPermissions = function (action) {
                 return res.status(403).json({
                     status: 403,
                     successful: false,
-                    message: "user is not part of the group",
+                    message: "group is not found or user is not part of the group",
                 })
             }
 
@@ -36,7 +36,7 @@ const GroupPermissions = function (action) {
                 })
             }
 
-            req.group = await Group.findOne({_id:group_id})
+            req.group = group
             return next()
             //compare
             
