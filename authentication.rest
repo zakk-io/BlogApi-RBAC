@@ -15,6 +15,6 @@ POST http://127.0.0.1:2000/api/auth/login
 Content-Type: application/json
 
 {
-    "email" : "mozakk.io@gmail.com",
+    "email" : "ug2424787@ines.ac.rw",
     "password" : "1234$Qwer"
 }

@@ -100,12 +100,12 @@ const PendedPosts = async (req,res) => {
         const posts = await Posts.find({
             group_id : group_id,
             status : "pending"
-        })
+        }).populate("author" , "username")
         
         if(posts.length === 0){
             return res.status(200).json({
                 status: 200,
-                successful: true,
+                successful: false,
                 message : "no pended posts for now"
             })          
         }
@@ -117,14 +117,6 @@ const PendedPosts = async (req,res) => {
         })
         
     } catch (error) {
-        if(error.name === "CastError"){
-            return res.status(404).json({
-                status: 404,
-                successful: false,
-                message: "resoures not found",
-            })
-        }
-
         console.log(error);
         res.json(error) 
     }
@@ -136,10 +128,22 @@ const PostApproval = async (req,res) => {
         const group_id = req.params.group_id
         const post_id = req.params.post_id
 
-        await Posts.updateOne({
+        const post = await Posts.findOne({
             _id : post_id,
             group_id,
-            status : "pending"  
+            status : "pending"   
+        })
+
+        if(!post){
+            return res.status(404).json({
+                status: 404,
+                successful: false,
+                message : "post not found"
+            })  
+        }
+
+        await Posts.updateOne({
+            _id : post._id,
         } , {$set:{status : "approved"}})
         
         return res.status(200).json({
@@ -149,14 +153,6 @@ const PostApproval = async (req,res) => {
         })
 
     } catch (error) {
-        if(error.name === "CastError"){
-            return res.status(404).json({
-                status: 404,
-                successful: false,
-                message: "resoures not found",
-            })
-        }
-
         console.log(error);
         res.json(error) 
     }
@@ -254,6 +250,40 @@ const DeletePost = async (req,res) => {
 
 
 
+const DeletePendedPosts = async (req,res) => {
+    try {
+        const post_id = req.params.post_id
+        const post = await Posts.findOne({
+            _id : post_id,
+            status : "pending"
+        })
+
+        if(!post){
+           return res.status(404).json({
+               status: 404,
+               successful: false,
+               message : "post not found"
+           })  
+        }
+
+        await Posts.findByIdAndDelete(
+            {_id : post._id},
+        )
+        
+        return res.status(200).json({
+            status: 200,
+            successful: true,
+            message: "post deleted successfully",
+        })
+        
+    } catch (error) {
+        console.log(error);
+        res.json(error) 
+    }
+}
+
+
+
 
 
 module.exports = {
@@ -263,4 +293,5 @@ module.exports = {
     PendedPosts,
     UpdatePost,
     DeletePost,
+    DeletePendedPosts,
 }

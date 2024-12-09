@@ -8,7 +8,7 @@ const groups = require("./routes/groups")
 const posts = require("./routes/posts")
 const comments = require("./routes/comments")
 const {HandlingJsonSyntaxError,AuthMiddleware} = require("./middlewares")
-const GroupPermissions = require("./Permissions/group")
+const GroupPermissions  = require("./Permissions/group")
 const Groups = require("./models/groups")
 const Posts = require("./models/posts")
 //packages
@@ -56,17 +56,23 @@ app.use(comments)
 
 app.use(AuthMiddleware)
 
-app.get('/dashbaord/:group_id',async (req,res) => {
+app.get('/dashbaord/:group_id',GroupPermissions("dashbaord"),async (req,res) => {
     const user = req.user
     const data = {
         user,
+        group_id : req.params.group_id
     }
     res.render('dashbaord',data)
 })
 
 
-app.get('/dashbaord/posts',(req,res) => {
-    res.render('dashbaord-posts')
+app.get('/dashbaord/:group_id/posts',GroupPermissions("dashbaord-posts"),(req,res) => {
+    const user = req.user
+    const data = {
+        user,
+        group_id : req.params.group_id
+    }
+    res.render('dashbaord-posts',data)
 })
 
 app.get('*',(req,res) => {

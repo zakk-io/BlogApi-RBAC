@@ -21,7 +21,6 @@ const IsGroupMemeber = function() {
                 })
             }
             req.user_group = group
-
             next()
         } catch (error) {
             if(error.name === "CastError"){
@@ -55,31 +54,28 @@ const PostPermissions = function(action,check_ownership) {
                 (perm) => perm.subject === "post" && perm.actions.includes(action)
             )
 
-            const post = await Posts.findOne({
-                _id :post_id,
-                author: req.user.id,
-                status: "approved" 
-            })
-
-            if(!post){
-                return res.status(404).json({
-                    status: 404,
-                    successful: false,
-                    message: "post not found",
-                })
-            }
-
             if(haspermission){
-                req.post = post
                 return next()
             }
 
             if(check_ownership){
-                if(post){
-                  req.post = post
-                  return next()
+                const post = await Posts.findOne({
+                    _id :post_id,
+                    author: req.user.id,
+                    status: "approved" 
+                })
+
+                if(!post){
+                    return res.status(404).json({
+                        status: 404,
+                        successful: false,
+                        message: "post not found",
+                    })
                 }
+                req.post = post
+                return next()
             }
+
 
             return res.status(403).json({
                 status: 403,

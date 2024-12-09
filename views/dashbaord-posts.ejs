@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
+    <title>Group Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+    .error-message {
+    background-color: #f44336; /* Red background */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+</style>
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container">
@@ -17,18 +27,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                        <a class="nav-link" href="/dashbaord/<%=group_id%>">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="posts.html">Posts</a>
+                        <a class="nav-link active" href="">Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="posts.html">logout</a>
+                        <a class="nav-link" href="/logout">Logout</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <span class="navbar-text text-light">Logged in as: <span id="username">User</span></span>
+                        <span class="navbar-text text-light">Logged in as: <span id="username"><%=user.email%></span></span>
                     </li>
                 </ul>
             </div>
@@ -36,26 +46,21 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4 mb-4">Posts Section</h1>
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5 class="card-title">Post Title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p class="card-text"><small class="text-muted">Author: John Doe | Date: 2024-11-30</small></p>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-success">Accept</button>
-                    <button class="btn btn-danger">Delete</button>
-                </div>
-            </div>
+        <div id="message" class="error-message" style="display: none;"></div> 
+        <h1 class="display-4 mb-4 text-center">Posts Section</h1>
+        
+        <!-- Posts Container -->
+        <div class="row row-cols-1 row-cols-md-2 g-4 posts_container" id="card-row">
+    
         </div>
     </div>
 
+
+
+    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Example: Set the logged-in user's name
-        const loggedInUser = "Jane Doe"; // Replace with dynamic server-side data if available
-        document.getElementById("username").textContent = loggedInUser;
-    </script>
+    <script src="/dashbaord-posts.js"></script>
 </body>
 </html>
